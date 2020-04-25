@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import request
 from app01.forms import TestForm
 
-def info( request ) :
-    return render( request, "app01/info.html", {"info" : "Information successfuly validated"})
+def info( request, test_form ) :
+    return render( request, "app01/info.html", {"form" : test_form })
 
 def form_test( request ) :
 
@@ -19,7 +19,7 @@ def form_test( request ) :
             print( "Age : ", test_form.cleaned_data["age"])
             print( "Email : ", test_form.cleaned_data["email"])
 
-            return info( request )
+            return info( request, test_form )
         else:
             print("Form validation failed")      
     

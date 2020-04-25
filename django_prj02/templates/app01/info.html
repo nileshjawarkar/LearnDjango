@@ -7,6 +7,12 @@
 </head>
 <body>
     <h1>Info Page</h1>
-    {{ info }}
+    {% if form %}
+    <ul> Following fields submited
+    {% for key in form.fields.keys %}
+        <li>{% form.fields[key] %}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
 </body>
 </html>
