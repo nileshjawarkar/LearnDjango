@@ -9,6 +9,5 @@ class TestForm( forms.Form ) :
 
     def clean( self ) :
         all_fileds = super().clean()
-        
-
-
+        if all_fileds["email"] != all_fileds["reemail"] :
+            raise forms.ValidationError("MAKE SURE EMAILS MATCH!")
