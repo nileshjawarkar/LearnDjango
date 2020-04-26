@@ -11,7 +11,9 @@
     <ul>
         <li><a href="{% url 'app01:index' %}">Home</a></li>
         <li><a href="{% url 'app01:blds' %}">Buildings</a></li>
-        <li><a href="{% url 'app01:flats' %}">Flats</a></li>
+        <li><a href="{% url 'app01:flats' %}">Flats</a></li>        
+        <li><a href="{% url 'app01:addblds' %}">Add Buildings</a></li>
+        <li><a href="{% url 'app01:addflats' %}">Add Flats</a></li>
     </ul>
     {% block body_block %}
     {% endblock %}

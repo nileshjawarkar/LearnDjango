@@ -5,6 +5,8 @@ app_name = 'app01'
 
 urlpatterns = [
     path('', app01_views.index, name="index" ),
-    path('blds/', app01_views.list_blds, name="blds" ),
-    path('flats/', app01_views.list_flats, name="flats" ),
+    path('blds/', app01_views.blds, name="blds" ),
+    path('flats/', app01_views.flats, name="flats" ),    
+    path('addblds/', app01_views.add_blds, name="addblds" ),
+    path('addflats/', app01_views.add_flats, name="addflats" ),
 ]
