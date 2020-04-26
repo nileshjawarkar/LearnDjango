@@ -14,3 +14,6 @@ class Flat( models.Model ) :
     def __str__(self) :
         return self.building.name + str(self.no)
 
+    class Meta:
+        unique_together = ('building', 'no',)
+
