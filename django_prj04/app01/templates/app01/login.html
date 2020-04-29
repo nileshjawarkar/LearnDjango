@@ -1,3 +1,16 @@
 {% extends 'app01/base.html' %}
 {% block body_block %}
+<div class="jumbotron">
+    {% if err_message %}
+        <label>{{ err_message }}</label>
+    {% endif %}
+    <form action="{% url 'app01:login' %}" method="post">
+        {% csrf_token %}
+        <label for="username">User name : </label>
+        <input type="text" name="username" id="username">
+        <label for="password">Password : </label>
+        <input type="password" name="password" id="password">
+        <input type="submit" value="Login">
+    </form>
+</div>
 {% endblock %}

@@ -1,9 +1,31 @@
 from django.shortcuts import render
-from django.http import request
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
 from app01.forms import UserForm, UserProfileForm
 
 def index( request ) :
     return render( request, "app01/index.html")
+
+def user_login( request ) :
+
+    err_message = ""
+    if request.method == "POST" :
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(username=username, password=password)
+        if user :
+            login(request, user)
+            return HttpResponseRedirect( reverse("index") )
+        else :
+           err_message = "Invalid credentials" 
+    
+    return render( request, "app01/login.html", { "err_message" : err_message })
+
+def user_logout( request ) :
+    logout( request )
+    return HttpResponseRedirect( reverse("index") )
 
 
 def register( request ) :
