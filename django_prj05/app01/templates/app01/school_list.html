@@ -1,0 +1,22 @@
+{% extends 'app01/base.html' %}
+{% block body_block %}
+<div>
+    <h1>Add new school : <a href="{% url 'app01:create' %}">Click here</a></h1>
+
+    {% if school_list %}
+    <h1>School list : </h1>    
+    <ul>
+    {% for school in school_list %}       
+        <li>{{school.name}}, 
+            <a href="{% url 'app01:details' pk=school.pk %}">Details</a>
+            <a href="{% url 'app01:update' pk=school.pk %}">Update</a> 
+            <a href="{% url 'app01:delete' pk=school.pk %}">Delete</a> 
+        </li>   
+    {% endfor %}
+    </ul>
+    {% else %}
+    <h2>School list empty</h2>
+    {% endif %}
+    
+</div>
+{% endblock %}
