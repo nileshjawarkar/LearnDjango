@@ -14,11 +14,8 @@ class BookViewset( viewsets.ModelViewSet ) :
     # permission_classes = (IsAuthenticated)
 
     def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = BookSerializer( instance )
-        return Response( serializer.data )
-
-    def update(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
+        inst = self.get_object()
+        seri = BookSerializer( inst)        
+        return Response( seri.data )
 
 
