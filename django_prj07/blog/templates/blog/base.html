@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>My Blog</title>
+      <link rel="stylesheet" href="{% static 'blog/css/bootstrap.css' %}">
+      <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top">
+         <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">My Blog</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+               <ul class="navbar-nav ml-auto">
+                  {% if user.is_authenticated %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'register' %}">Register</a>
+                  </li>
+                  {% endif %}
+               </ul>
+            </div>
+         </div>
+      </nav>
+      <div class="container">
+         {% block content-block %}
+         {% endblock %}
+      </div>
+      <script src="{% static 'blog/js/jquery.js' %}" charset="utf-8"></script>
+      <script src="{% static 'blog/js/bootstrap.js' %}" charset="utf-8"></script>
+   </body>
+</html>
