@@ -40,11 +40,14 @@
                         {% endfor %}
                         <input class="btn btn-outline-dark btn-block"type="submit" value="{{form_submit_value|safe}}">
                     </form>
-                    <div>
+                    <hr class="mt-4">
+                    <div class="mt-3">
                         {% if form_title == 'Sign in' %}
-                        <a href="{% url 'register' %}">Sign up</a>
+                        <div class="text-primary float-left">If not registered.. Please signup here</div>
+                        <a class="btn btn-outline-primary float-right" href="{% url 'register' %}">Sign up</a>
                         {% else %}
-                        <a href="{% url 'login' %}">Sign in</a>
+                        <div class="text-primary float-left">If already registered.. Please signin here</div>
+                        <a  class="btn btn-outline-primary float-right" href="{% url 'login' %}">Sign in</a>
                         {% endif %}
                     </div>    
                 </div>
