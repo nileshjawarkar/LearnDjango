@@ -1,0 +1,75 @@
+{% extends 'blog/base.html' %}
+{% block content-block %}
+
+<div class="row border-left border-right border-bottom">
+    <div class="col-md-3 border-right">
+        <div class="row border-bottom">
+            <div class="col text-left text-muted p-2">
+                <h5>Your posts</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="list-unstyled pl-3">
+                    {% for post in posts %}
+                        <li><a class="btn btn-link" href="{% url 'blog:my_post_selected' post.pk %}">{{ post.title }}</a></li>              
+                    {% endfor %}
+                </ul>                
+            </div>
+        </div>    
+    </div>
+    <div class="col-md-9">
+        <form method="post">
+        <div class="row border-bottom pl-2 py-1">
+            <div class="col text-left text-muted">
+                <h5>Your posts</h5>
+            </div>
+            <div class="col text-right text-muted" >
+                {% if form_type == "edit" or form_type == "new" %}
+                    <input type="submit" class="btn btn-outline-success" value="Save"></input>
+                {% elif form_type == "delete" %}
+                    <input type="submit" class="btn btn-outline-danger" value="Confirm Delete"></input>
+                {% else %}
+                    <a class="btn btn-outline-primary" href="{% url 'blog:my_post_create' %}">New</a>
+                    <a class="btn btn-outline-primary" href="{% url 'blog:my_post_edit' form_pk %}">Edit</a>
+                    <a class="btn btn-outline-danger" href="{% url 'blog:my_post_delete' form_pk %}">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col">
+               
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <div class="font-weight-bold text-danger text-center">
+                        {% for error in form.non_field_errors %}
+                            <span>{{ error|escape }}</span>
+                        {% endfor %}
+                        </div>
+                        <br>
+                    {% endif %}
+        
+                    {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }} 
+                        {{ field }}
+                        {% if field.errors %}
+                        <div class="font-weight-bold text-danger">
+                            {% for error in field.errors %}
+                            <span> {{ error|escape }}</span>
+                            {% endfor %}
+                        </div>
+                        {% elif field.help_text %}
+                        <p class="form-text text-muted">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}            
+                      
+            </div>
+        </div>
+    </form>
+    </div>    
+</div>
+
+{% endblock %}

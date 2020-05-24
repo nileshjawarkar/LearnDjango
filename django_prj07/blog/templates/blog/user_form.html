@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>My Blog</title>
+      <link rel="stylesheet" href="{% static 'blog/css/bootstrap.css' %}">
+      <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+   </head>
+   <body>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-7 mx-auto border rounded py-4 px-5">
+                    <h2 class="mb-5 text-center">{{form_title|safe}}</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="font-weight-bold text-danger text-center">
+                            {% for error in form.non_field_errors %}
+                                <span>{{ error|escape }}</span>
+                            {% endfor %}
+                            </div>
+                            <br>
+                        {% endif %}
+
+                        {% for field in form %}
+                        <div class="form-group">
+                            {{ field.label_tag }} 
+                            {{ field }}
+                            {% if field.errors %}
+                            <div class="font-weight-bold text-danger">
+                                {% for error in field.errors %}
+                                <span> {{ error|escape }}</span>
+                                {% endfor %}
+                            </div>
+                            {% elif field.help_text %}
+                            <p class="form-text text-muted">{{ field.help_text|safe }}</p>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        <input class="btn btn-outline-dark btn-block"type="submit" value="{{form_submit_value|safe}}">
+                    </form>
+                    <div>
+                        {% if form_title == 'Sign in' %}
+                        <a href="{% url 'register' %}">Sign up</a>
+                        {% else %}
+                        <a href="{% url 'login' %}">Sign in</a>
+                        {% endif %}
+                    </div>    
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'blog/js/jquery.js' %}" charset="utf-8"></script>
+        <script src="{% static 'blog/js/bootstrap.js' %}" charset="utf-8"></script>
+     </body>
+  </html>
+  

@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+{% block content-block %}
+
+<div class="row">
+    <div class="col-md-7 mx-auto mt-4 border rounded py-4 px-5">
+        <h2 class="mb-5 text-center">Post list</h2>
+        <ul>
+            {% for post in object_list %}
+                <li>{{ post.title }}</li>
+            {% empty %}
+                <li>No post yet.</li>
+            {% endfor %}
+        </ul>   
+    </div>
+</div>
+{% endblock %}
